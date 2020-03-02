@@ -9,11 +9,11 @@ const OUTPUT_DIR = path.resolve(__dirname, 'output');
 const outputPath = path.join(OUTPUT_DIR, 'team.html');
 
 const render = require('./lib/htmlRenderer');
-
+const employeeArr =[]
 
 
 function teambuilder() {
-    console.log("PLease build your team")
+    console.log("Please build your team")
 
     inquirer.prompt([{
         type: "list",
@@ -135,7 +135,7 @@ function engineer(){
                 {
                     type:"input",
                     message:"What is you engineer's Github",
-                    name:"engineerGit",
+                    name:"github",
                 },
                 {
                     type: "list",
@@ -149,7 +149,9 @@ function engineer(){
         if (answers.moreMembers === "yes") {
             teambuilder();
         }else{
+            employeeArr.push(answers)
             console.log("your team is being built")
+            engineer(employeeArr)
         }
     })
 }

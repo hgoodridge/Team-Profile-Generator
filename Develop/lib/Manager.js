@@ -5,7 +5,7 @@ class Manager extends Employee{
     constructor(name, id, email,officeNumber){
         super(name, id, email)
         this.officeNumber = officeNumber
-        this.title = "Manager"
+        this.role = "Manager"
     }
     getOfficeNumber(){
         return this.officeNumber
