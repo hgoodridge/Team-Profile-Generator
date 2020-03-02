@@ -67,11 +67,13 @@ function manager(){
         }
     ])
         .then(function(answers){
+            const newMember = new Manager(answers.managerName,answers.managerId, answers.managerEmail, answers.managerOffice)
+            employeeArr.push(newMember)
             if (answers.moreMembers === "yes") {
                 teambuilder();
             }else{
                 console.log("your team is being built")
-                console.log(answers)
+                renderThis()
             }
         })
 }
@@ -107,10 +109,13 @@ function intern(){
                 }
     ])
     .then(function(answers){
+        const newMember = new Intern(answers.internName,answers.interId, answers.internEmail, answers.school)
+        employeeArr.push(newMember)
         if (answers.moreMembers === "yes") {
             teambuilder();
         }else{
             console.log("your team is being built")
+            renderThis()
         }
     })
 }
@@ -146,13 +151,22 @@ function engineer(){
                 }
     ])
     .then(function(answers){
+        const newMember = new Engineer(answers.engineerName,answers.engineerId, answers.engineerEmail, answers.github)
+        employeeArr.push(newMember)
         if (answers.moreMembers === "yes") {
             teambuilder();
         }else{
             employeeArr.push(answers)
             console.log("your team is being built")
-            engineer(employeeArr)
+            renderThis()
         }
+    })
+}
+const renderThis =()=>{
+    console.log(employeeArr)
+    fs.writeFile(outputPath, render(employeeArr), "utf8", err=> {
+        if (err) throw err
+        console.log('...writing file')
     })
 }
 teambuilder()
