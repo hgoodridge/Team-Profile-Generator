@@ -9,8 +9,15 @@ const OUTPUT_DIR = path.resolve(__dirname, 'output');
 const outputPath = path.join(OUTPUT_DIR, 'team.html');
 
 const render = require('./lib/htmlRenderer');
-const employeeArr =[]
+const employeeArr = []
 
+const renderThis =()=>{
+    console.log(employeeArr)
+    fs.writeFile(outputPath,render(employeeArr), "utf8", err=> {
+        if (err) throw err
+        console.log('...writing file')
+    })
+}
 
 function teambuilder() {
     console.log("Please build your team")
@@ -156,19 +163,12 @@ function engineer(){
         if (answers.moreMembers === "yes") {
             teambuilder();
         }else{
-            employeeArr.push(answers)
             console.log("your team is being built")
             renderThis()
         }
     })
 }
-const renderThis =()=>{
-    console.log(employeeArr)
-    fs.writeFile(outputPath, render(employeeArr), "utf8", err=> {
-        if (err) throw err
-        console.log('...writing file')
-    })
-}
+
 teambuilder()
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
